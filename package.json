@@ -2,7 +2,7 @@
   "name": "uniswap-v3-subgraph",
   "license": "UNLICENSED",
   "scripts": {
-    "codegen": "graph codegen",
+    "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ codingnirvana/uniswap-v3-subgraph",
     "create-local": "graph create --node http://localhost:8020/ codingnirvana/uniswap-v3-subgraph",
@@ -11,6 +11,12 @@
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.1",
-    "@graphprotocol/graph-ts": "0.20.0"
+    "@graphprotocol/graph-ts": "0.20.0",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-prettier": "^6.1.0",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.2"	
   }
 }

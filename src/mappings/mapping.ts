@@ -1,32 +1,31 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt, BigDecimal } from "@graphprotocol/graph-ts"
 import {
-  UniswapV3Core,
-  FeeAmountEnabled,
-  OwnerChanged,
-  PoolCreated
-} from "../generated/UniswapV3Core/UniswapV3Core"
-import { ExampleEntity } from "../generated/schema"
+  UniswapV3Staker,
+  IncentiveCreated,
+  IncentiveEnded
+} from "../types/UniswapV3Staker/UniswapV3Staker"
+import { Incentive } from "../types/schema"
 
-export function handleFeeAmountEnabled(event: FeeAmountEnabled): void {
+export function handleIncentiveCreated(event: IncentiveCreated): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+  let entity = Incentive.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (entity == null) {
-    entity = new ExampleEntity(event.transaction.from.toHex())
+    entity = new Incentive(event.transaction.from.toHex())
 
     // Entity fields can be set using simple assignments
-    entity.count = BigInt.fromI32(0)
+    // entity.count = BigInt.fromI32(0)
   }
 
   // BigInt and BigDecimal math are supported
-  entity.count = entity.count + BigInt.fromI32(1)
+  // entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.fee = event.params.fee
-  entity.tickSpacing = event.params.tickSpacing
+  // entity.fee = event.params.fee
+  // entity.tickSpacing = event.params.tickSpacing
 
   // Entities can be written to the store with `.save()`
   entity.save()
@@ -53,6 +52,4 @@ export function handleFeeAmountEnabled(event: FeeAmountEnabled): void {
   // - contract.parameters(...)
 }
 
-export function handleOwnerChanged(event: OwnerChanged): void {}
-
-export function handlePoolCreated(event: PoolCreated): void {}
+export function handleIncentiveEnded(event: IncentiveEnded): void {}

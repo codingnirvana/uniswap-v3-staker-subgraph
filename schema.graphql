@@ -1,6 +1,10 @@
-type ExampleEntity @entity {
+type Incentive @entity {
   id: ID!
-  count: BigInt!
-  fee: Int! # uint24
-  tickSpacing: Int! # int24
+  rewardToken: Bytes
+  pool: Bytes
+  startTime: BigInt!
+  endTime: BigInt!
+  refundee: Bytes
+  isActive: Boolean
+  refund: BigDecimal!
 }
