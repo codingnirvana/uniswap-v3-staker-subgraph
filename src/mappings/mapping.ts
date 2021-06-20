@@ -1,16 +1,24 @@
-import { BigInt, BigDecimal } from "@graphprotocol/graph-ts"
 import {
   UniswapV3Staker,
   IncentiveCreated,
   IncentiveEnded
 } from "../types/UniswapV3Staker/UniswapV3Staker"
+
 import { Incentive } from "../types/schema"
+import { getIncentiveId } from "../utils/incentive"
 
 export function handleIncentiveCreated(event: IncentiveCreated): void {
-  let id = event.transaction.hash.toHex() + "-" + event.logIndex.toString();
 
-  let entity = new Incentive(id);
-  
+  let incentiveId = getIncentiveId(
+    event.params.rewardToken,
+    event.params.pool,
+    event.params.startTime,
+    event.params.endTime,
+    event.params.refundee
+  );
+
+  let entity = new Incentive(incentiveId);
+
   entity.pool = event.params.pool;
   entity.rewardToken = event.params.rewardToken;
   entity.refundee = event.params.refundee;
@@ -23,4 +31,5 @@ export function handleIncentiveCreated(event: IncentiveCreated): void {
   entity.save();
 }
 
-export function handleIncentiveEnded(event: IncentiveEnded): void {}
+export function handleIncentiveEnded(event: IncentiveEnded): void {
+ }
