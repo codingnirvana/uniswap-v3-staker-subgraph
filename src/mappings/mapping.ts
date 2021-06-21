@@ -30,4 +30,11 @@ export function handleIncentiveCreated(event: IncentiveCreated): void {
   entity.save()
 }
 
-export function handleIncentiveEnded(event: IncentiveEnded): void { }
+export function handleIncentiveEnded(event: IncentiveEnded): void {
+  let incentiveId = event.params.incentiveId.toHex()
+  let entity = Incentive.load(incentiveId)
+
+  entity.isActive = false
+  entity.refund = event.params.refund
+  entity.save()
+}
