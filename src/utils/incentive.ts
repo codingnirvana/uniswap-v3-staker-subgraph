@@ -1,22 +1,18 @@
-import { BigInt, Address, ByteArray, crypto} from '@graphprotocol/graph-ts'
-import { concatByteArrays } from "./common"
+import { BigInt, Address, crypto, ethereum } from '@graphprotocol/graph-ts'
 
 export function getIncentiveId(rewardToken: Address, pool: Address, startTime: BigInt, endTime: BigInt, refundee: Address): string {
-    let eventParams = new Array<string>(5);
+    let incentiveKeyParams: Array<ethereum.Value> = [
+        ethereum.Value.fromAddress(rewardToken),
+        ethereum.Value.fromAddress(pool),
+        ethereum.Value.fromUnsignedBigInt(startTime),
+        ethereum.Value.fromUnsignedBigInt(endTime),
+        ethereum.Value.fromAddress(refundee)
+    ]
 
-    eventParams[0] = rewardToken.toHex();
-    eventParams[1] = pool.toHex();
-    eventParams[2] = startTime.toHex();
-    eventParams[3] = endTime.toHex();
-    eventParams[4] = refundee.toHex();
+    let incentiveKey = incentiveKeyParams as ethereum.Tuple
+    let encoded = ethereum.encode(ethereum.Value.fromTuple(incentiveKey))!
 
+    let incentiveId = crypto.keccak256(encoded).toHexString()
 
-    let incentiveParamsConcatenated: ByteArray;
-    for (let i = 0; i < eventParams.length; i++) {
-        incentiveParamsConcatenated = concatByteArrays(incentiveParamsConcatenated, ByteArray.fromHexString(eventParams[i]));
-    }
-
-    let id = crypto.keccak256(incentiveParamsConcatenated).toHexString();
-
-    return id;
+    return incentiveId
 }

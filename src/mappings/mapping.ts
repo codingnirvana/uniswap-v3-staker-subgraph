@@ -1,5 +1,4 @@
 import {
-  UniswapV3Staker,
   IncentiveCreated,
   IncentiveEnded
 } from "../types/UniswapV3Staker/UniswapV3Staker"
@@ -15,21 +14,20 @@ export function handleIncentiveCreated(event: IncentiveCreated): void {
     event.params.startTime,
     event.params.endTime,
     event.params.refundee
-  );
+  )
 
-  let entity = new Incentive(incentiveId);
+  let entity = new Incentive(incentiveId)
 
-  entity.pool = event.params.pool;
-  entity.rewardToken = event.params.rewardToken;
-  entity.refundee = event.params.refundee;
-  entity.isActive = true;
+  entity.pool = event.params.pool
+  entity.rewardToken = event.params.rewardToken
+  entity.refundee = event.params.refundee
+  entity.isActive = true
 
-  entity.startTime = event.params.startTime;
-  entity.endTime = event.params.endTime;
-  entity.reward = event.params.reward;
+  entity.startTime = event.params.startTime
+  entity.endTime = event.params.endTime
+  entity.reward = event.params.reward
 
-  entity.save();
+  entity.save()
 }
 
-export function handleIncentiveEnded(event: IncentiveEnded): void {
- }
+export function handleIncentiveEnded(event: IncentiveEnded): void { }
