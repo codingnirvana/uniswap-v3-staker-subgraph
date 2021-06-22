@@ -7,4 +7,5 @@ type Incentive @entity {
   refundee: Bytes
   isActive: Boolean
   reward: BigInt!
+  refund: BigInt
 }
