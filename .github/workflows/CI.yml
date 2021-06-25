@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - subgraph-additions
   pull_request:
 
 jobs:
@@ -32,3 +33,4 @@ jobs:
       - run: yarn
       - run: yarn codegen
       - run: yarn build
+      - run: yarn test
