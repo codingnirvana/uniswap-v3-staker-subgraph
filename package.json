@@ -7,16 +7,21 @@
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ codingnirvana/uniswap-v3-subgraph",
     "create-local": "graph create --node http://localhost:8020/ codingnirvana/uniswap-v3-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ codingnirvana/uniswap-v3-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 codingnirvana/uniswap-v3-subgraph"
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 codingnirvana/uniswap-v3-subgraph",
+    "test": "cd test && ./test.sh"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.1",
     "@graphprotocol/graph-ts": "git://github.com/graphprotocol/graph-ts#2f628dfbce14adc40bab35d66604c4c7a2e6b46c",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
+    "apollo-fetch": "^0.7.0",
     "eslint": "^6.2.2",
     "eslint-config-prettier": "^6.1.0",
     "prettier": "^1.18.2",
-    "typescript": "^3.5.2"	
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.1"
   }
 }
