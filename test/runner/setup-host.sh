@@ -19,10 +19,10 @@ if ! which jq 2>&1 > /dev/null; then
 fi
 
 # Create the graph-node container
-docker-compose up --no-start graph-node
+docker-compose -f $DIRECTORY/docker-compose.yml up --no-start graph-node
 
 # Start graph-node so we can inspect it
-docker-compose start graph-node
+docker-compose -f $DIRECTORY/docker-compose.yml start graph-node
 
 # Identify the container ID
 CONTAINER_ID=$(docker container ls | grep graph-node | cut -d' ' -f1)
@@ -37,7 +37,7 @@ sed -i -e "s/host.docker.internal/$HOST_IP/g" $DIRECTORY/docker-compose.yml
 
 function stop_graph_node {
     # Ensure graph-node is stopped
-    docker-compose stop graph-node
+    docker-compose -f $DIRECTORY/docker-compose.yml stop graph-node
 }
 
 trap stop_graph_node EXIT

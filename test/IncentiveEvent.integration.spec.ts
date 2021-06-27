@@ -1,10 +1,7 @@
-const { createApolloFetch } = require("apollo-fetch");
-var assert = require('assert');
-const path = require("path");
+import { createApolloFetch } from "apollo-fetch";
+import { expect } from "chai";
 
-const srcDir = path.join(__dirname, "..");
 let graphNodeIP = "127.0.0.1";
-
 const fetchSubgraph = createApolloFetch({
     uri: `http://${graphNodeIP}:8000/subgraphs/name/codingnirvana/uniswap-v3-subgraph`,
 });
@@ -24,7 +21,7 @@ describe("Check records", function () {
         }`,
         });
 
-        assert.equal(subgraphData.data.incentives.length, 1);
+        expect(subgraphData.data.incentives.length).to.eq(1);
     });
 
     it("should have matching reward token address used while creation", async function () {
@@ -39,7 +36,7 @@ describe("Check records", function () {
 
 
         for (let idx = 0; idx < subgraphData.data.incentives.length; idx++) {
-            assert.equal(subgraphData.data.incentives[idx].rewardToken, rewardTokenAddr);
+            expect(subgraphData.data.incentives[idx].rewardToken).to.eq(rewardTokenAddr);
         }
     });
 
@@ -55,7 +52,7 @@ describe("Check records", function () {
 
 
         for (let idx = 0; idx < subgraphData.data.incentives.length; idx++) {
-            assert.equal(subgraphData.data.incentives[idx].pool, poolAddr);
+            expect(subgraphData.data.incentives[idx].pool).to.eq(poolAddr);
         }
     });
 
@@ -71,7 +68,7 @@ describe("Check records", function () {
 
 
         for (let idx = 0; idx < subgraphData.data.incentives.length; idx++) {
-            assert.equal(subgraphData.data.incentives[idx].refundee, refundeeAddr);
+            expect(subgraphData.data.incentives[idx].refundee).to.eq(refundeeAddr);
         }
     });
 
@@ -87,7 +84,7 @@ describe("Check records", function () {
 
 
         for (let idx = 0; idx < subgraphData.data.incentives.length; idx++) {
-            assert.equal(subgraphData.data.incentives[idx].reward, reward);
+            expect(subgraphData.data.incentives[idx].reward).equal(reward.toString());
         }
     });
 });
