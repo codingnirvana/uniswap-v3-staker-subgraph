@@ -4,3 +4,5 @@ src/types/
 .DS_STORE
 .idea
 yarn-error.log
+test/data
+todo
